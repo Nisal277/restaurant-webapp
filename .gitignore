@@ -1,0 +1,16 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn.lock
+
+# Logs
+logs/
+*.log
+.env
+
+# Build files
+dist/
+build/
+
+# Editor settings
+.vscode/
