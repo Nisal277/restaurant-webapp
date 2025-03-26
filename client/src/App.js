@@ -12,6 +12,8 @@ import AboutUsSection from './components/AboutUsSection';
 import ImageGallery from './components/ImageGallery';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import './App.css';
+import Menu from './components/Menu';
 
 function App() 
 {
