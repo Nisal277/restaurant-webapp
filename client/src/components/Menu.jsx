@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion , AnimatePresence } from 'framer-motion';
-import MenuBg from "../utils/images/menu-section-img.jpg"; // Adjust path accordingly
+import MenuBg from "../utils/images/menu-section-img.jpg"; 
 
 
 const menuStyles = {
@@ -13,14 +13,23 @@ const menuStyles = {
   content: { display: 'flex', width: '80%', justifyContent: 'space-between', gap: '30px' },
   menuItems: { width: '70%', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' },
   itemCard: { border: '1px solid #ddd', borderRadius: '10px', padding: '15px', textAlign: 'center', boxShadow: '0px 4px 6px rgba(0,0,0,0.1)' },
-  addButton: { backgroundColor: '#b22222', color: 'white', padding: '10px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '10px' },
+  addButton: { backgroundColor: '#b22222', color: 'white', padding: '12px', border: 'none', borderRadius: '20px', cursor: 'pointer', marginTop: '10px' , fontSize: '16px',transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out'},
   cart: { width: '350px',  maxHeight: '670px', overflowY: 'auto',  border: '1px solid #ddd', borderRadius: '10px', backgroundColor: '#f8f8f8', minHeight: '20px' },
   cartItem: { display: 'flex', justifyContent: 'space-between',alignItems: 'center', padding: '10px', borderBottom: '1px solid #ddd' ,  borderRadius: '8px',backgroundColor: '#f9f9f9',
     marginBottom: '8px' },
   checkout: { marginTop: '20px', backgroundColor: '#b22222', color: 'white', padding: '12px', border: 'none', borderRadius: '8px', cursor: 'pointer', width: '50%' ,   fontSize: '16px',
-    fontWeight: 'bold' },
+    fontWeight: 'bold' , marginTop: '10px' },
   itemImage: {  width: '100%', height: '150px',  objectFit: 'cover', borderRadius: '10px' },
-  removeButton: { backgroundColor: '#b22222', color: 'white', border: 'none', borderRadius: '5px', padding: '5px 10px', cursor: 'pointer',fontSize: '14px'}
+  removeButton: { backgroundColor: '#000', color: 'white', border: 'none', borderRadius: '5px', padding: '5px 10px', cursor: 'pointer',fontSize: '14px' , fontWeight: 'bold',
+    transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out' },
+  totalAmount: {marginTop: 'auto', fontSize: '18px', fontWeight: 'bold'},
+  cartItemsContainer: { flexGrow: 1,overflowY: 'auto'},
+  addButtonHover: { backgroundColor: '#000', color: 'white'},
+  removeButtonHover: {
+    backgroundColor: 'white',
+    color: '#000',
+    border: '1px solid #000'
+  }
 };
 
 const menuhead = {
@@ -28,11 +37,11 @@ const menuhead = {
   backgroundSize: "cover",
   backgroundPosition: "center",
   height: "300px",
-  width: "100%", // Adjust height as needed
+  width: "100%", 
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: "white", // Ensure text is visible
+  color: "white", 
   textAlign: "center",
 };
 
@@ -68,10 +77,24 @@ const menuData = {
 const Menu = () => {
   const [category, setCategory] = useState('breakfast');
   const [cart, setCart] = useState([]);
+  
 
   const addToCart = (item) => {
-    setCart([...cart, item]);
+    setCart((prevCart) => {
+      const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
+      
+      if (existingItem) {
+        return prevCart.map(cartItem =>
+          cartItem.id === item.id 
+            ? { ...cartItem, quantity: cartItem.quantity + 1 } 
+            : cartItem
+        );
+      } else {
+        return [...prevCart, { ...item, quantity: 1 }];
+      }
+    });
   };
+  
 
   const removeFromCart = (index) => {
     const newCart = cart.filter((_, i) => i !== index);
@@ -99,9 +122,9 @@ const Menu = () => {
             key={cat} 
             style={{ ...menuStyles.categoryButton, ...(category === cat ? menuStyles.activeCategory : {}) }}
             onClick={() => setCategory(cat)}
-            whileHover={{ scale: 1.1 }} // Slight zoom on hover
-            whileTap={{ scale: 0.9 }}   // Shrinks when clicked
-            animate={{ opacity: category === cat ? 1 : 0.6 }} // Highlight active category
+            whileHover={{ scale: 1.1 }} 
+            whileTap={{ scale: 0.9 }}   
+            animate={{ opacity: category === cat ? 1 : 0.6 }} 
             transition={{ duration: 0.3 }}
           >
             {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -113,9 +136,9 @@ const Menu = () => {
         <motion.div 
         style={menuStyles.menuItems}
         key={category} 
-        initial={{ opacity: 0, y: 10 }} // Start from slightly below with low opacity
-        animate={{ opacity: 1, y: 0 }} // Animate to full visibility
-        exit={{ opacity: 0, y: -10 }} // Smooth transition out when switching categories
+        initial={{ opacity: 0, y: 10 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        exit={{ opacity: 0, y: -10 }} 
         transition={{ duration: 0.4, ease: "easeInOut" }}
         >
 
@@ -124,9 +147,9 @@ const Menu = () => {
             <motion.div 
             key={item.id} 
             style={menuStyles.itemCard}
-            initial={{ opacity: 0, scale: 0.8 }} // Appear small
-            animate={{ opacity: 1, scale: 1 }} // Grow into view
-            exit={{ opacity: 0, scale: 0.8 }} // Shrink out
+            initial={{ opacity: 0, scale: 0.8 }} 
+            animate={{ opacity: 1, scale: 1 }} 
+            exit={{ opacity: 0, scale: 0.8 }} 
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
               <img src={item.image} alt={item.name} style={menuStyles.itemImage} />
@@ -141,16 +164,24 @@ const Menu = () => {
         
         <div style={menuStyles.cart}>
           <h2>Your Cart</h2>
+
+          <div style={menuStyles.cartItemsContainer}>
+
           {cart.length === 0 ? <p>Your Cart looks a little empty.</p> : 
             cart.map((item, index) => (
               <div key={index} style={menuStyles.cartItem}>
-                <span>{item.name} - Rs. {item.price}</span>
+                <span>{item.name} (x{item.quantity}) - Rs. {item.price * item.quantity}</span>
                 <button
                  style={menuStyles.removeButton}
                  onClick={() => removeFromCart(index)}>Remove</button>
               </div>
             ))}
-          <h3 style={{ marginTop: '10px' }}>Total: <strong>Rs. {totalAmount}</strong></h3>
+
+          </div>
+          
+
+          
+           <h3 style={menuStyles.totalAmount}>Total: Rs. {totalAmount}</h3>
           <button style={menuStyles.checkout}>Checkout</button>
         </div>
       </div>
