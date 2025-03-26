@@ -15,6 +15,8 @@ import Footer from './components/Footer';
 import './App.css';
 import Menu from './components/Menu';
 import Home from './components/Home';
+import Login from './components/Login';
+import Register from './components/Register';
 
 function App() 
 {
@@ -41,7 +43,7 @@ function App()
               <Link to='/about' className='nav-link text-uppercase  text-center fw-semibold' style={{ color: '#ff6347' }}>About</Link>
               <Link to='/contact' className='nav-link text-uppercase  text-center fw-semibold' style={{ color: '#ff6347' }}>Contact</Link>
             </Nav>
-            <Link to='/contact'>
+            <Link to='/Login'>
               <button type='button' className='btn rounded-0 text-capitalize my-3 my-lg-0 ms-lg-4 text-nowrap' style={{ backgroundColor: 'black', color: 'white' }}>Log in / Sign up</button>
             </Link>
           </Navbar.Collapse>
@@ -53,6 +55,9 @@ function App()
           <Route path='/menu' element={<Menu />} />  {/* Menu Page Route */}
           <Route path='/about' element={<AboutUsSection />} />
           <Route path='/contact' element={<ContactSection />} />
+          <Route path='/Login' element={<Login />} />
+          <Route path='/Register' element={<Register />} />
+
         </Routes>
 
 
