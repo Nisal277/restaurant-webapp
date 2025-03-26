@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion , AnimatePresence } from 'framer-motion';
+import { FaShoppingCart , FaPlus, FaMinus } from 'react-icons/fa';
 import MenuBg from "../utils/images/menu-section-img.jpg"; 
 
 
@@ -15,8 +16,8 @@ const menuStyles = {
   itemCard: { border: '1px solid #ddd', borderRadius: '10px', padding: '15px', textAlign: 'center', boxShadow: '0px 4px 6px rgba(0,0,0,0.1)' },
   addButton: { backgroundColor: '#b22222', color: 'white', padding: '12px', border: 'none', borderRadius: '20px', cursor: 'pointer', marginTop: '10px' , fontSize: '16px',transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out'},
   cart: { width: '350px',  maxHeight: '670px', overflowY: 'auto',  border: '1px solid #ddd', borderRadius: '10px', backgroundColor: '#f8f8f8', minHeight: '20px' },
-  cartItem: { display: 'flex', justifyContent: 'space-between',alignItems: 'center', padding: '10px', borderBottom: '1px solid #ddd' ,  borderRadius: '8px',backgroundColor: '#f9f9f9',
-    marginBottom: '8px' },
+  cartItem: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px', border: '1px solid #ddd' ,  borderRadius: '10px',backgroundColor: '#f9f9f9',
+    marginBottom: '10px' },
   checkout: { marginTop: '20px', backgroundColor: '#b22222', color: 'white', padding: '12px', border: 'none', borderRadius: '8px', cursor: 'pointer', width: '50%' ,   fontSize: '16px',
     fontWeight: 'bold' , marginTop: '10px' },
   itemImage: {  width: '100%', height: '150px',  objectFit: 'cover', borderRadius: '10px' },
@@ -101,7 +102,19 @@ const Menu = () => {
     setCart(newCart);
   };
 
-  const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+  const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  const handleIncrease = (index) => {
+    setCart(cart.map((item, i) => 
+      i === index ? { ...item, quantity: item.quantity + 1 } : item
+    ));
+  };
+  
+  const handleDecrease = (index) => {
+    setCart(cart.map((item, i) => 
+      i === index ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
+    ));
+  };
 
   return (
     <div style={menuStyles.container}>
@@ -163,14 +176,51 @@ const Menu = () => {
         
         
         <div style={menuStyles.cart}>
-          <h2>Your Cart</h2>
+          <h2><FaShoppingCart/> Your Cart</h2>
 
           <div style={menuStyles.cartItemsContainer}>
 
           {cart.length === 0 ? <p>Your Cart looks a little empty.</p> : 
             cart.map((item, index) => (
               <div key={index} style={menuStyles.cartItem}>
-                <span>{item.name} (x{item.quantity}) - Rs. {item.price * item.quantity}</span>
+                <span style={{ flex: 1 }}>{item.name} (x{item.quantity}) - Rs. {item.price * item.quantity}</span>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+
+                <button 
+              onClick={() => handleDecrease(index)} 
+              disabled={item.quantity === 1} 
+              style={{
+                backgroundColor: 'blue', 
+                color: 'white', 
+                border: 'none', 
+                padding: '5px 8px', 
+                borderRadius: '5px', 
+                cursor: item.quantity === 1 ? 'not-allowed' : 'pointer',
+                opacity: item.quantity === 1 ? 0.5 : 1
+              }}
+            >
+              <FaMinus size={12} />
+            </button>
+
+            <span style={{ fontSize: '16px', fontWeight: 'bold' }}>{item.quantity}</span>
+
+            <button 
+              onClick={() => handleIncrease(index)} 
+              style={{
+                backgroundColor: 'green', 
+                color: 'white', 
+                border: 'none', 
+                padding: '5px 8px', 
+                borderRadius: '5px', 
+                cursor: 'pointer',
+                marginRight: "10px"
+              }}
+            >
+              <FaPlus size={12} />
+            </button>
+            </div>
+
                 <button
                  style={menuStyles.removeButton}
                  onClick={() => removeFromCart(index)}>Remove</button>
@@ -182,7 +232,8 @@ const Menu = () => {
 
           
            <h3 style={menuStyles.totalAmount}>Total: Rs. {totalAmount}</h3>
-          <button style={menuStyles.checkout}>Checkout</button>
+          <button style={{...menuStyles.checkout ,backgroundColor: cart.length === 0 ? 'black' : '#b22222',cursor: cart.length === 0 ? 'not-allowed' : 'pointer', opacity: cart.length === 0 ? 0.6 : 1 }} disabled={cart.length === 0} >Checkout</button>
+          {cart.length === 0 && <p style={{ color: 'red' }}>Add items to checkout</p>}
         </div>
       </div>
     </div>
