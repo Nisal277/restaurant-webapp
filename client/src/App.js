@@ -5,7 +5,7 @@ import Header from './components/Header'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import { Routes, Route , Link } from 'react-router-dom';
+import { Router, Routes, Route , Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons';
 import AboutUsSection from './components/AboutUsSection';
@@ -14,10 +14,12 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import './App.css';
 import Menu from './components/Menu';
+import Home from './components/Home';
 
 function App() 
 {
   return (
+    
     <div>
       <Navbar expand='lg' className='fixed-top bg-body-tertiary shadow'>
         <Container>
@@ -46,20 +48,24 @@ function App()
         </Container>
       </Navbar>
     
-    
-      <Header/>
-      <AboutUsSection></AboutUsSection>
-      <ImageGallery/>
-      <ContactSection></ContactSection>
-      <Footer></Footer>
+      <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/menu' element={<Menu />} />  {/* Menu Page Route */}
+          <Route path='/about' element={<AboutUsSection />} />
+          <Route path='/contact' element={<ContactSection />} />
+        </Routes>
 
 
+      
+
+        <Footer />
 
 
 
       
       
     </div>
+    
   );
 }
   

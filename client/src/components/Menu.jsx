@@ -15,7 +15,7 @@ const menuStyles = {
   menuItems: { width: '70%', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' },
   itemCard: { border: '1px solid #ddd', borderRadius: '10px', padding: '15px', textAlign: 'center', boxShadow: '0px 4px 6px rgba(0,0,0,0.1)' },
   addButton: { backgroundColor: '#b22222', color: 'white', padding: '12px', border: 'none', borderRadius: '20px', cursor: 'pointer', marginTop: '10px' , fontSize: '16px',transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out'},
-  cart: { width: '350px',  maxHeight: '670px', overflowY: 'auto',  border: '1px solid #ddd', borderRadius: '10px', backgroundColor: '#f8f8f8', minHeight: '20px' },
+  cart: { width: '350px',  maxHeight: '670px', overflowY: 'auto',  border: '1px solid #ddd', borderRadius: '10px', backgroundColor: '#f8f8f8', minHeight: '20px' , display: 'flex', flexDirection: 'column', alignItems: 'center',padding: '15px' },
   cartItem: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px', border: '1px solid #ddd' ,  borderRadius: '10px',backgroundColor: '#f9f9f9',
     marginBottom: '10px' },
   checkout: { marginTop: '20px', backgroundColor: '#b22222', color: 'white', padding: '12px', border: 'none', borderRadius: '8px', cursor: 'pointer', width: '50%' ,   fontSize: '16px',
