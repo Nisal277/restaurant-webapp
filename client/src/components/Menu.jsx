@@ -1,9 +1,9 @@
-
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { motion , AnimatePresence } from 'framer-motion';
 import { FaShoppingCart , FaPlus, FaMinus } from 'react-icons/fa';
 import MenuBg from "../utils/images/menu-section-img.jpg"; 
 
+const API_URL = "http://localhost:5001/api/menu";
 
 const menuStyles = {
   container: { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', fontFamily: 'Arial, sans-serif' },
@@ -19,7 +19,7 @@ const menuStyles = {
   cartItem: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px', border: '1px solid #ddd' ,  borderRadius: '10px',backgroundColor: '#f9f9f9',
     marginBottom: '10px' },
   checkout: { marginTop: '20px', backgroundColor: '#b22222', color: 'white', padding: '12px', border: 'none', borderRadius: '8px', cursor: 'pointer', width: '50%' ,   fontSize: '16px',
-    fontWeight: 'bold' , marginTop: '10px' },
+    fontWeight: 'bold' ,},
   itemImage: {  width: '100%', height: '150px',  objectFit: 'cover', borderRadius: '10px' },
   removeButton: { backgroundColor: '#000', color: 'white', border: 'none', borderRadius: '5px', padding: '5px 10px', cursor: 'pointer',fontSize: '14px' , fontWeight: 'bold',
     transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out' },
@@ -47,7 +47,7 @@ const menuhead = {
 };
 
 
-
+/*
 const menuData = {
   breakfast: [
     { id: 1, name: 'Pancakes', price: 250 , image: require('../utils/images/pancake.jpeg') },
@@ -74,19 +74,38 @@ const menuData = {
     { id: 18, name: 'Pizza', price: 490 , image: require('../utils/images/pizza.jpeg') }
   ]
 };
+*/
 
 const Menu = () => {
+  const [menuItems, setMenuItems] = useState([]);
   const [category, setCategory] = useState('breakfast');
   const [cart, setCart] = useState([]);
-  
+
+   // Fetch menu items from backend
+   useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        setMenuItems(data);
+      } catch (error) {
+        console.error("Failed to fetch menu items:", error);
+      }
+    };
+
+    fetchMenu();
+  }, []);
+
+  // Filter items by selected category
+  const filteredItems = menuItems.filter(item => item.category.toLowerCase() === category);
 
   const addToCart = (item) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
+      const existingItem = prevCart.find(cartItem => cartItem._id === item._id);
       
       if (existingItem) {
         return prevCart.map(cartItem =>
-          cartItem.id === item.id 
+          cartItem._id === item._id 
             ? { ...cartItem, quantity: cartItem.quantity + 1 } 
             : cartItem
         );
@@ -130,7 +149,7 @@ const Menu = () => {
       </header>
 
       <div style={menuStyles.categoryContainer}>
-        {Object.keys(menuData).map((cat) => (
+        {["breakfast", "lunch", "dinner"].map((cat) => (
           <motion.button 
             key={cat} 
             style={{ ...menuStyles.categoryButton, ...(category === cat ? menuStyles.activeCategory : {}) }}
@@ -148,7 +167,7 @@ const Menu = () => {
       <div style={menuStyles.content}>
         <motion.div 
         style={menuStyles.menuItems}
-        key={category} 
+        
         initial={{ opacity: 0, y: 10 }} 
         animate={{ opacity: 1, y: 0 }} 
         exit={{ opacity: 0, y: -10 }} 
@@ -156,16 +175,16 @@ const Menu = () => {
         >
 
           <AnimatePresence mode="wait">
-          {menuData[category].map((item) => (
+          {filteredItems.map((item) => (
             <motion.div 
-            key={item.id} 
+            key={item._id} 
             style={menuStyles.itemCard}
             initial={{ opacity: 0, scale: 0.8 }} 
             animate={{ opacity: 1, scale: 1 }} 
             exit={{ opacity: 0, scale: 0.8 }} 
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
-              <img src={item.image} alt={item.name} style={menuStyles.itemImage} />
+              <img src={item.imageUrl} alt={item.name} style={menuStyles.itemImage} />
               <h3>{item.name}</h3>
               <p>Rs. {item.price}</p>
               <button style={menuStyles.addButton} onClick={() => addToCart(item)}>Add to Cart</button>
