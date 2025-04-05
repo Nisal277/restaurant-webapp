@@ -6,25 +6,54 @@ import MenuBg from "../utils/images/menu-section-img.jpg";
 const API_URL = "http://localhost:5001/api/menu";
 
 const menuStyles = {
-  container: { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', fontFamily: 'Arial, sans-serif' },
-  header: { width: '100%', backgroundColor: '#b22222', color: 'white', padding: '20px', textAlign: 'center', fontSize: '24px', fontWeight: 'bold' },
-  categoryContainer: { display: 'flex', justifyContent: 'center', gap: '15px', margin: '20px 0' ,flexWrap: 'wrap'  },
-  categoryButton: { padding: '10px 20px', fontSize: '16px', borderRadius: '20px', border: '1px solid #b22222', cursor: 'pointer', backgroundColor: 'white', color: '#b22222' },
-  activeCategory: { backgroundColor: '#b22222', color: 'white' },
-  content: { display: 'flex', width: '80%', justifyContent: 'space-between', gap: '30px' },
-  menuItems: { width: '70%', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' },
-  itemCard: { border: '1px solid #ddd', borderRadius: '10px', padding: '15px', textAlign: 'center', boxShadow: '0px 4px 6px rgba(0,0,0,0.1)' },
-  addButton: { backgroundColor: '#b22222', color: 'white', padding: '12px', border: 'none', borderRadius: '20px', cursor: 'pointer', marginTop: '10px' , fontSize: '16px',transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out'},
-  cart: { width: '350px',  maxHeight: '670px', overflowY: 'auto',  border: '1px solid #ddd', borderRadius: '10px', backgroundColor: '#f8f8f8', minHeight: '20px' , display: 'flex', flexDirection: 'column', alignItems: 'center',padding: '15px' },
-  cartItem: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px', border: '1px solid #ddd' ,  borderRadius: '10px',backgroundColor: '#f9f9f9',
-    marginBottom: '10px' },
-  checkout: { marginTop: '20px', backgroundColor: '#b22222', color: 'white', padding: '12px', border: 'none', borderRadius: '8px', cursor: 'pointer', width: '50%' ,   fontSize: '16px',
-    fontWeight: 'bold' ,},
-  itemImage: {  width: '100%', height: '150px',  objectFit: 'cover', borderRadius: '10px' },
-  removeButton: { backgroundColor: '#000', color: 'white', border: 'none', borderRadius: '5px', padding: '5px 10px', cursor: 'pointer',fontSize: '14px' , fontWeight: 'bold',
-    transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out' },
-  totalAmount: {marginTop: 'auto', fontSize: '18px', fontWeight: 'bold'},
-  cartItemsContainer: { flexGrow: 1,overflowY: 'auto'},
+  container: {
+    display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', fontFamily: 'Poppins, sans-serif', background: 'linear-gradient(to bottom, #fff5f0, #fefefe)'
+  },
+  header: {
+    width: '100%', backgroundColor: '#b22222', color: 'white', padding: '20px', textAlign: 'center', fontSize: '24px', fontWeight: 'bold'
+  },
+  categoryContainer: {
+    display: 'flex', justifyContent: 'center', gap: '15px', margin: '20px 0', flexWrap: 'wrap'
+  },
+  categoryButton: {
+    padding: '10px 25px', fontSize: '16px', borderRadius: '30px', border: 'none', cursor: 'pointer', background: 'linear-gradient(90deg, #ff7e5f, #feb47b)', color: 'white', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', transition: 'transform 0.3s ease'
+  },
+  activeCategory: {
+    transform: 'scale(1.05)', background: 'linear-gradient(90deg, #f85032, #e73827)'
+  },
+  content: {
+    display: 'flex', width: '90%', justifyContent: 'space-between', gap: '30px', flexWrap: 'wrap'
+  },
+  menuItems: {
+    width: '100%', maxWidth: '900px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '25px'
+  },
+  itemCard: {
+    borderRadius: '16px', padding: '15px', textAlign: 'center', background: 'white', boxShadow: '0px 8px 20px rgba(0,0,0,0.1)', transition: 'transform 0.2s ease-in-out'
+  },
+  addButton: {
+    background: 'linear-gradient(to right, #b22222, #ff6347)', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '20px', cursor: 'pointer', marginTop: '10px', fontSize: '15px', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
+  },
+  cart: {
+    width: '350px', maxHeight: '670px', overflowY: 'auto', borderRadius: '16px', backgroundColor: '#fff', minHeight: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', boxShadow: '0 8px 20px rgba(0,0,0,0.15)'
+  },
+  cartItem: {
+    display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px', borderRadius: '12px', backgroundColor: '#f3f3f3', marginBottom: '12px', boxShadow: '0 2px 6px rgba(0,0,0,0.05)'
+  },
+  checkout: {
+    marginTop: '20px', backgroundColor: '#b22222', color: 'white', padding: '12px', border: 'none', borderRadius: '25px', cursor: 'pointer', width: '60%', fontSize: '16px', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+  },
+  itemImage: {
+    width: '100%', height: '180px', objectFit: 'cover', borderRadius: '12px', marginBottom: '10px'
+  },
+  removeButton: {
+    backgroundColor: '#000', color: 'white', border: 'none', borderRadius: '8px', padding: '6px 12px', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold'
+  },
+  totalAmount: {
+    marginTop: 'auto', fontSize: '20px', fontWeight: 'bold'
+  },
+  cartItemsContainer: {
+    flexGrow: 1, overflowY: 'auto', width: '100%' , textAlign: "center"
+  },
   addButtonHover: { backgroundColor: '#000', color: 'white'},
   removeButtonHover: {
     backgroundColor: 'white',

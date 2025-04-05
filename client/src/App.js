@@ -17,38 +17,70 @@ import Menu from './components/Menu';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
+import { FaUtensils, FaHome, FaConciergeBell, FaInfoCircle, FaEnvelope, FaSignInAlt } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+
 
 function App() 
 {
   return (
     
     <div>
-      <Navbar expand='lg' className='fixed-top bg-body-tertiary shadow'>
-        <Container>
-          <Navbar.Brand>
-            <Link to='/' className='navbar-brand text-success d-flex align-items-center'>
-              <FontAwesomeIcon icon={faUtensils} size='xl' style={{ color: '#ff6347' }} />
-              <span className='ms-3 lh-1 fw-semibold' style={{ color: '#ff6347' }}>
-                Flavour Hub
-                <br></br>
-                Restaurant
-              </span>
-            </Link>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse className='text-center' id='basiv-navbar-nav'>
-            <Nav className='me-auto justify-content-center w-100'>
-              <Link to='/' className='nav-link text-uppercase text-center fw-semibold' style={{ color: '#ff6347'}}>Home</Link>
-              <Link to='/menu' className='nav-link text-uppercase  text-center fw-semibold' style={{ color: '#ff6347' }}>Menu</Link>
-              <Link to='/about' className='nav-link text-uppercase  text-center fw-semibold' style={{ color: '#ff6347' }}>About</Link>
-              <Link to='/contact' className='nav-link text-uppercase  text-center fw-semibold' style={{ color: '#ff6347' }}>Contact</Link>
-            </Nav>
-            <Link to='/Login'>
-              <button type='button' className='btn rounded-0 text-capitalize my-3 my-lg-0 ms-lg-4 text-nowrap' style={{ backgroundColor: 'black', color: 'white' }}>Log in / Sign up</button>
-            </Link>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <Navbar expand='lg' className='fixed-top shadow' style={{
+      background: 'linear-gradient(to right, #a4508b, #5f0a87)',
+      padding: '0.8rem 1rem',
+    }}>
+      <Container>
+        <Navbar.Brand as={Link} to='/' className='d-flex align-items-center text-white'>
+          <FaUtensils size={28} style={{ color: '#ff9a44' }} />
+          <span className='ms-3 lh-1 fw-semibold'>
+            Flavour Hub
+            <br />
+            Restaurant
+          </span>
+        </Navbar.Brand>
+
+        <Navbar.Toggle aria-controls='basic-navbar-nav' className='bg-light' />
+        <Navbar.Collapse id='basic-navbar-nav'>
+          <Nav className='ms-auto text-center align-items-center'>
+            <motion.div whileHover={{ scale: 1.1 }} className='mx-2'>
+              <Link to='/' className='nav-link text-white fw-semibold d-flex align-items-center'>
+                <FaHome className='me-1' /> Home
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.1 }} className='mx-2'>
+              <Link to='/menu' className='nav-link text-white fw-semibold d-flex align-items-center'>
+                <FaConciergeBell className='me-1' /> Menu
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.1 }} className='mx-2'>
+              <Link to='/about' className='nav-link text-white fw-semibold d-flex align-items-center'>
+                <FaInfoCircle className='me-1' /> About
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.1 }} className='mx-2'>
+              <Link to='/contact' className='nav-link text-white fw-semibold d-flex align-items-center'>
+                <FaEnvelope className='me-1' /> Contact
+              </Link>
+            </motion.div>
+
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className='mx-2'>
+              <Link to='/login'>
+                <button className='btn text-white fw-semibold' style={{
+                  background: 'linear-gradient(to right, #fc6076, #ff9a44)',
+                  border: 'none',
+                  borderRadius: '30px',
+                  padding: '0.5rem 1.2rem',
+                }}>
+                  <FaSignInAlt className='me-2' />
+                  Log in / Sign up
+                </button>
+              </Link>
+            </motion.div>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
     
       <Routes>
           <Route path='/' element={<Home />} />

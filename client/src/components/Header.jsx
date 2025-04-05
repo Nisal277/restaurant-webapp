@@ -3,6 +3,9 @@ import './Header.css';
 import Carousel from 'react-bootstrap/Carousel';
 import MenuBtn from './MenuBtn';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FaEnvelopeOpenText } from 'react-icons/fa';
+
 
 function Header() {
   return (
@@ -17,8 +20,32 @@ function Header() {
                             <p className='mb-4 text-center text-md-start'>Welcome to Flavour Hub Restaurant in Colombo, the perfect experience for special people. Our fancy restaurant will bring your special moments to another level.</p>
                             <div className='d-flex flex-column flex-sm-row'>
                                 <MenuBtn />
-                                <Link to='/contact'>
-                                    <button type='button' className='btn btn-outline-light btn-lg rounded-0 text-capitalize mx-2 shadow'>Contact us</button>
+                                <Link to='/contact' style={{ textDecoration: 'none' }} >
+                                    <motion.div
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className='mx-2 mb-3 mb-sm-0'
+                                        >                                                              
+                                        <button
+                                          type='button'
+                                            className='btn btn-lg text-capitalize d-flex align-items-center justify-content-center shadow'
+                                                style={{
+                                                    background: 'linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4)', // cool color contrast
+                                                    color: 'white',
+                                                    border: 'none',
+                                                    borderRadius: '30px',
+                                                    padding: '0.6rem 1.4rem',
+                                                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+                                                    textDecoration: 'none',
+                                                    fontStyle: 'normal', 
+                                                        }}
+                                                            >
+                                                            <FaEnvelopeOpenText className='me-2' />
+                                                                Contact us
+                                                                
+                                                                    </button>
+                                                                    
+                                    </motion.div>
                                 </Link>
                             </div>
                         </div>
@@ -35,8 +62,32 @@ function Header() {
                             <p className='mb-4 text-center text-md-start'>Welcome to Flavour Hub Restaurant in Colombo, the perfect experience for special people. Our fancy restaurant will bring your special moments to another level.</p>
                             <div className='d-flex flex-column flex-sm-row'>
                                 <MenuBtn />
-                                <Link to='/contact'>
-                                    <button type='button' className='btn btn-outline-light btn-lg rounded-0 text-capitalize mx-2 shadow'>Contact us</button>
+                                <Link to='/contact' style={{ textDecoration: 'none' }} >
+                                    <motion.div
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className='mx-2 mb-3 mb-sm-0'
+                                        >                                                              
+                                        <button
+                                          type='button'
+                                            className='btn btn-lg text-capitalize d-flex align-items-center justify-content-center shadow'
+                                                style={{
+                                                    background: 'linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4)', // cool color contrast
+                                                    color: 'white',
+                                                    border: 'none',
+                                                    borderRadius: '30px',
+                                                    padding: '0.6rem 1.4rem',
+                                                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+                                                    textDecoration: 'none',
+                                                    fontStyle: 'normal', 
+                                                        }}
+                                                            >
+                                                            <FaEnvelopeOpenText className='me-2' />
+                                                                Contact us
+                                                                
+                                                                    </button>
+                                                                    
+                                    </motion.div>
                                 </Link>
                             </div>
                         </div>
@@ -53,8 +104,32 @@ function Header() {
                             <p className='mb-4 text-center text-md-start'>Welcome to Flavour Hub Restaurant in Colombo, the perfect experience for special people. Our fancy restaurant will bring your special moments to another level.</p>
                             <div className='d-flex flex-column flex-sm-row'>
                                 <MenuBtn />
-                                <Link to='/contact'>
-                                    <button type='button' className='btn btn-outline-light btn-lg rounded-0 text-capitalize mx-2 shadow'>Contact us</button>
+                                <Link to='/contact' style={{ textDecoration: 'none' }} >
+                                    <motion.div
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className='mx-2 mb-3 mb-sm-0'
+                                        >                                                              
+                                        <button
+                                          type='button'
+                                            className='btn btn-lg text-capitalize d-flex align-items-center justify-content-center shadow'
+                                                style={{
+                                                    background: 'linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4)', // cool color contrast
+                                                    color: 'white',
+                                                    border: 'none',
+                                                    borderRadius: '30px',
+                                                    padding: '0.6rem 1.4rem',
+                                                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+                                                    textDecoration: 'none',
+                                                    fontStyle: 'normal', 
+                                                        }}
+                                                            >
+                                                            <FaEnvelopeOpenText className='me-2' />
+                                                                Contact us
+                                                                
+                                                                    </button>
+                                                                    
+                                    </motion.div>
                                 </Link>
                             </div>
                         </div>
