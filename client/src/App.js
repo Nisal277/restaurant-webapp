@@ -15,11 +15,16 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
 import Home from './components/Home';
-
+import AdminDash from "./components/AdminDash";//admin
+import MenuDash from "./components/MenuDash"; //admin
 import LoginPage from './pages/LoginPage';
 import Logout from './pages/Logout';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+
+
+
 
 function App() {
 
@@ -102,6 +107,13 @@ function App() {
           <Route path='/contact' element={<ContactSection />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/logout' element={<Logout />} />
+          <Route path='/admindash' element={<AdminDash />} />
+          <Route path='/menudash' element={<MenuDash />} />
+
+          
+
+          
+
         </Routes>
       </div>
 

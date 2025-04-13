@@ -29,7 +29,7 @@ function Login() {
            
           navigate("/");
         } else if (res.data.role === "Admin") {
-          navigate("/admin-dashboard");
+          navigate("/admindash");
         }
       } else {
         setError("Invalid credentials");
